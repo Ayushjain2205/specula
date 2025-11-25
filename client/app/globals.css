@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #f0f0f0;
+  --text-main: #000000;
+  --accent-yellow: #ffeb3b;
+  --accent-pink: #ff80ab;
+  --accent-cyan: #00bcd4;
+  --border-width: 3px;
+  --shadow-offset: 4px;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Neubrutalist Utilities */
+.bg-neu {
+  background-color: #ffffff;
+  border: var(--border-width) solid #000000;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000000;
+}
+
+.bg-neu-yellow {
+  background-color: var(--accent-yellow);
+  border: var(--border-width) solid #000000;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000000;
+}
+
+.bg-neu-pink {
+  background-color: var(--accent-pink);
+  border: var(--border-width) solid #000000;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000000;
+}
+
+.bg-neu-cyan {
+  background-color: var(--accent-cyan);
+  border: var(--border-width) solid #000000;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000000;
+}
+
+.btn-neu {
+  background-color: #ffffff;
+  border: var(--border-width) solid #000000;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000000;
+  color: #000000;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: all 0.1s ease;
+}
+
+.btn-neu:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px #000000;
+}
+
+.btn-neu:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0px 0px 0px #000000;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 3px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}

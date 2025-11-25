@@ -1,0 +1,8 @@
+node_modules
+build
+.env
+
+backup/
+wallet_pisuthd.yaml
+client-old/
+old/
