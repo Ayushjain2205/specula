@@ -27,6 +27,7 @@ interface AccountContextType extends AccountState {
   placeBet: (roundId: number, betUp: boolean, amount: string) => Promise<BetResult>;
   claimWinnings: (roundId: number) => Promise<ClaimResult>;
   createMarket: (description: string, targetValue: number, duration: number, bettingCutoff: number) => Promise<CreateMarketResult>;
+  addAdmin: (adminAddress: string) => Promise<void>;
 }
 
 export const AccountContext = createContext<AccountContextType | undefined>(undefined);
@@ -292,6 +293,48 @@ const Provider = ({ children }: ProviderProps) => {
     };
   }, [account, provider]);
 
+  /**
+   * Add a new admin to the contract
+   * @param adminAddress - The wallet address to add as admin
+   */
+  const addAdmin = useCallback(async (adminAddress: string): Promise<void> => {
+    if (!account) {
+      throw new Error("Wallet not connected");
+    }
+
+    if (!provider) {
+      throw new Error("Provider not available");
+    }
+
+    console.log('Adding admin:', adminAddress);
+
+    if (!adminAddress || adminAddress.trim().length === 0) {
+      throw new Error("Admin address is required");
+    }
+
+    const args = new Args().addString(adminAddress);
+
+    const contract = new SmartContract(account, CONTRACT_ADDRESS);
+
+    const operation: any = await contract.call(
+      'addAdmin',
+      args,
+      { coins: Mas.fromString('0') }
+    );
+
+    console.log('Add admin transaction submitted, operation id:', operation.id);
+
+    console.log('Waiting for operation to be finalized...');
+    const status = await operation.waitFinalExecution();
+    console.log('Operation status:', OperationStatus[status]);
+
+    if (status !== OperationStatus.Success) {
+      throw new Error("Add admin transaction failed");
+    }
+
+    console.log('Admin added successfully');
+  }, [account, provider]);
+
   const accountContext: AccountContextType = useMemo(
     () => ({
       account,
@@ -302,6 +345,7 @@ const Provider = ({ children }: ProviderProps) => {
       placeBet,
       claimWinnings,
       createMarket,
+      addAdmin,
     }),
     [
       account,
@@ -312,6 +356,7 @@ const Provider = ({ children }: ProviderProps) => {
       placeBet,
       claimWinnings,
       createMarket,
+      addAdmin,
     ]
   );
 

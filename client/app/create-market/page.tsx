@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { TrendingUp, Calendar, Target, AlertCircle, CheckCircle2, Loader2, Clock } from 'lucide-react';
 import { useAccount } from '@/contexts/account';
 
@@ -263,6 +264,11 @@ const CreateMarketPage = () => {
                     <p className="text-sm font-bold text-yellow-900">
                         <strong>Note:</strong> Only contract owners and authorized admins can create markets. 
                         If you don't have permission, the transaction will fail.
+                        <span className="block mt-2">
+                            <Link href="/admin" className="underline hover:text-yellow-700">
+                                Manage Permissions →
+                            </Link>
+                        </span>
                     </p>
                 </div>
             </div>
