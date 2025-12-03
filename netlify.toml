@@ -1,0 +1,16 @@
+[build]
+  # Set the base directory to the client folder
+  base = "client"
+  
+  # Build command - Netlify will automatically use the base directory
+  # The Next.js plugin will handle the build process
+  command = "npm run build"
+
+# Install the Netlify Next.js plugin for proper Next.js support
+# This plugin automatically handles Next.js routing, API routes, and serverless functions
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  # Set Node.js version (Next.js 15 requires Node 18+)
+  NODE_VERSION = "18"
